@@ -5,27 +5,23 @@ package com.example.exe3_2024;
  * @since		5/10/2024
  * this app applies the options menu in order to change background colors, screen1 has R,G,B and screen2 has R,G,B,W
  */
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 
-public class MainActivity extends AppCompatActivity implements View.OnCreateContextMenuListener {
-    int id;
+public class Secondary extends AppCompatActivity {
+    String title;
     LinearLayout ll;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ll = findViewById(R.id.ll);
+        setContentView(R.layout.activity_secondary);
+        ll = findViewById(R.id.llt);
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         /**
@@ -35,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnCreateCont
          * @param	menu Description	refers to the Menu object for this screen.
          * @return	Description			returns a super action of this activity.
          */
+        menu.add(0,0,4,"White");
         getMenuInflater().inflate(R.menu.main,menu);
         return super.onCreateOptionsMenu(menu);
     }
@@ -48,23 +45,20 @@ public class MainActivity extends AppCompatActivity implements View.OnCreateCont
          * @param	item Description	refers to the item selected by the user.
          * @return	Description			returns a super action of this activity.
          */
-
-        id  = item.getItemId();
-        if(id==R.id.red){ll.setBackgroundColor(0xFFFF2020);}
-        else if (id==R.id.green) {ll.setBackgroundColor(0xFF20FF20);}
-        else if (id==R.id.blue) {ll.setBackgroundColor(0xFF2020FF);}
+        title  = item.getTitle().toString();
+        if(title.equals("Red")){ll.setBackgroundColor(0xFFFF2020);}
+        else if (title.equals("Green")) {ll.setBackgroundColor(0xFF20FF20);}
+        else if (title.equals("Blue")) {ll.setBackgroundColor(0xFF2020FF);}
+        else if (title=="White") {ll.setBackgroundColor(0xFFFFFFFF);}
         return super.onOptionsItemSelected(item);
     }
-
     public void next(View view) {
         /**
-         * when the next screen button is pressed this action will send them to the next screen
+         * when the return button is pressed this action will send them to the previous screen
          * <p>
          *
          * @param	view Description	refers to this activity.
          */
-
-        Intent si = new Intent(this, Secondary.class );
-        startActivity(si);
+        finish();
     }
 }
